@@ -24,6 +24,11 @@ class DiscoveryActivity : AppCompatActivity(), DiscoveryContract.View {
         presenter.loadImages()
     }
 
+    override fun onDestroy() {
+        presenter.detach()
+        super.onDestroy()
+    }
+
     override fun showImages() {
         Toast.makeText(this, "Nasa API was Called!", Toast.LENGTH_LONG).show()
     }
