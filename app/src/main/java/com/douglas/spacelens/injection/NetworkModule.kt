@@ -1,5 +1,6 @@
 package com.douglas.spacelens.injection
 
+import com.douglas.spacelens.api.NasaApi
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -13,12 +14,10 @@ private const val BASE_URL = "https://images-api.nasa.gov/"
 @Module
 object NetworkModule {
 
-
-
+    @Provides
+    internal fun provideNasaApi(retrofit: Retrofit): NasaApi = retrofit.create(NasaApi::class.java)
 
     @Provides
-    @Reusable
-    @JvmStatic
     internal fun provideRetrofitInterface(): Retrofit =
             Retrofit.Builder()
                 .baseUrl(BASE_URL)
