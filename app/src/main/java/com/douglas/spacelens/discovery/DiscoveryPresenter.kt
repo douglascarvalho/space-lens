@@ -35,7 +35,7 @@ class DiscoveryPresenter @Inject constructor(
         )
     }
 
-    private fun postImages(imageResponse: PictureResponse) {
+    private fun postImages(pictures: List<Picture>) {
         view.showImages()
     }
 }

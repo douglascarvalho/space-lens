@@ -1,9 +1,10 @@
 package com.douglas.spacelens.injection
 
 import com.douglas.spacelens.api.NasaApi
+import com.douglas.spacelens.model.adapter.PictureAdapter
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
-import dagger.Reusable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -21,7 +22,11 @@ object NetworkModule {
     internal fun provideRetrofitInterface(): Retrofit =
             Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create(
+                    Moshi.Builder().add(
+                        PictureAdapter()
+                    ).build()
+                ))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .build()
 
